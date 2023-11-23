@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculadora de Puntos</title>
+</head>
+
+<body>
+    <h2>Calculadora de Puntos</h2>
+    <p>Respuestas:</p>
+    <input type="text" id="Respuestas">
+    <p>Mis Respuestas:</p>
+    <input type="text" id="misRespuestas">
+    <br><br>
+    <button onclick="calcularPuntos()">Calcular Puntos</button>
+    <br><br>
+    <p id="resultado"></p>
+
+    <script>
+        function calcularPuntos() {
+            let Respuestas = document.getElementById("Respuestas").value;
+            let misRespuestas = document.getElementById("misRespuestas").value;
+            let puntos = 0;
+            let ListaRespuestas = [];
+            let ListaMisRespuestas = [];
+            let incorrectas = [];
+
+            for (let i = 0; i < misRespuestas.length; i++) {
+                ListaMisRespuestas.push(misRespuestas[i]);
+            }
+
+            for (let i = 0; i < Respuestas.length; i++) {
+                ListaRespuestas.push(Respuestas[i]);
+            }
+
+            let cantidad = ListaRespuestas.length;
+
+            for (let i = 0; i < cantidad; i++) {
+                if (ListaRespuestas[i] === ListaMisRespuestas[i] || ListaRespuestas[i] === "*") {
+                    puntos = puntos + 1;
+                } else {
+                    incorrectas.push(i + " - " + ListaRespuestas[i]);
+                }
+            }
+
+            let resultado = "Puntos obtenidos: " + puntos + "<br>" +
+                "Nota: " + ((puntos / cantidad) * 100) + "<br>" +
+                "Items incorrectos: " + incorrectas;
+
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+    </script>
+</body>
+
+</html>
